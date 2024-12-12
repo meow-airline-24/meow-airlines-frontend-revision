@@ -1,0 +1,28 @@
+Navigation Bar:
+                                                        
+(Logo) ____________________________________________Login Button_(Avatar)
+
+_________________________________________________________________________
+Promotion Section: coupons, sales, ...
+
+=> Button to go into promotion details
+_________________________________________________________________________
+Flight Search Section:
+
+// same as bamboo
+_________________________________________________________________________
+Blog post and news Section:
+
+- Titles of blog/news (rotating, each are hyperlink)
+- Probably an iframe to a dedicated blog/news page
+_________________________________________________________________________
+Recommendation Section:
+
++ Popular Area (an image of the area with description + rotating)
+
++ Some premade tickets (basically flight search but with premade data)
+_________________________________________________________________________
+Footer:
+
+- Made by our team
+- Link to github repo
