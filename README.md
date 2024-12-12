@@ -33,9 +33,11 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the web page.
 
 ## About us
+
 MeowAirlines Team members:
-    - Bùi Tuấn Minh (22025500) - **Project Leader**
-    - Phan Vũ Liêm (22025504)
-    - Hoàng Minh Nghĩa (22025508)
+
+- Bùi Tuấn Minh (22025500) - **Project Leader**
+- Phan Vũ Liêm (22025504)
+- Hoàng Minh Nghĩa (22025508)
 
 *From UET with love <3*
