@@ -9,6 +9,7 @@ export type Ticket = {
     gender: boolean;
     id_type: "nin" | "passport";
     id_number: string;
+    issuing_date: Date;
     country_code: number;
     seat_id: Seat[];
 }
