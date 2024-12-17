@@ -18,8 +18,8 @@ export default function LoginForm() {
 
     return (
         <>
-            <Flex minH={'80vh'} align={'center'} justify={'center'}>
-                <Box bg={'white'} width={400} borderRadius={8} paddingLeft={8} paddingRight={8} paddingBottom={3}
+            <Flex width={'vw'} minWidth={1080} marginTop={'80px'} align={'center'} justify={'center'}>
+                <Box bg={'white'} width={400} minW={400} borderRadius={8} paddingLeft={8} paddingRight={8} paddingBottom={3}
                     shadow={'0px 0px 8px -4px var(--shadow-color)'}
                     shadowColor={'black'}>
                     <VStack>

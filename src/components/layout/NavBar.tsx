@@ -15,9 +15,9 @@ import { Tooltip } from '@/components/ui/tooltip'
 
 export const NavItem = forwardRef<HTMLButtonElement, ButtonProps> (
     function NavItem(props, ref) {
-        const { disabled, children, ...rest } = props
+        const { disabled, children, onClick, ...rest } = props
         return (
-            <Button disabled={disabled} ref={ref} {...rest}
+            <Button disabled={disabled} onClick={onClick} ref={ref} {...rest}
                 cursor={'pointer'}
                 width={36}
                 bg={'colorPalette.500'}
@@ -45,7 +45,7 @@ export const NavItem = forwardRef<HTMLButtonElement, ButtonProps> (
     }
 )
 
-export default function Nav() {
+export default function NavBar() {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -71,7 +71,7 @@ export default function Nav() {
 
     return (
         <>
-            <Box bg={'colorPalette.100'} px={8} id={'background'} minW={1080} width={'vw'}
+            <Box bg={'colorPalette.100'} px={8} minW={1080} width={'vw'}
                 position={'relative'} zIndex={1}
                 boxShadow={'0px 0px 40px 40px var(--shadow-color)'} 
                 shadowColor={'colorPalette.100'}>
@@ -82,16 +82,13 @@ export default function Nav() {
                         </Link>
 
                         <HStack gap={16}>
-                            {/*
-                                for testing the first navitem will be disabled
-                            */}
-                            <NavItem disabled>
+                            <NavItem disabled={pathname === '/'} onClick={() => router.push('/')}>
                                 Home
                             </NavItem>
-                            <NavItem>
+                            <NavItem disabled={pathname === '/flight'} onClick={() => router.push('/flight')}>
                                 Flight
                             </NavItem>
-                            <NavItem>
+                            <NavItem disabled={pathname === '/booking'} onClick={() => router.push('/booking')}>
                                 Booking
                             </NavItem>
                         </HStack>
@@ -106,37 +103,34 @@ export default function Nav() {
                         {pathname === '/login' || pathname === '/register' ? (
                             <></>
                         ) : (
-                            <LoginButton />
+                            <>
+                                <LoginButton />
+                                <MenuRoot size={'md'}>
+                                    <MenuTrigger>
+                                        <Tooltip 
+                                            content={'Account'}
+                                            showArrow
+                                            positioning={{
+                                                offset: { mainAxis: 24 }
+                                            }}
+                                            contentProps={{
+                                                css: {
+                                                    '--tooltip-bg': 'colors.colorPalette.500'
+                                                }
+                                            }}>
+                                            <span>
+                                                <Avatar src={'../avt-light.svg'} fallback={''} _hover={{cursor: 'pointer'}}/>
+                                            </span>
+                                        </Tooltip>
+                                    </MenuTrigger>
+                                    <MenuContent>
+                                        <MenuItem value={'settings'}>Settings</MenuItem>
+                                        <MenuItem value={'logout'}>Logout</MenuItem>
+                                    </MenuContent>
+                                </MenuRoot>
+                            </>
                         )}
-                            
-                        {/*
-                            conditional rendering to display avatar at home page
-                            not in login or register page
-                        */}
-                        
-                        <MenuRoot size={'md'}>
-                            <MenuTrigger>
-                                <Tooltip 
-                                    content={'Account'}
-                                    showArrow
-                                    positioning={{
-                                        offset: { mainAxis: 24 }
-                                    }}
-                                    contentProps={{
-                                        css: {
-                                            '--tooltip-bg': 'colors.colorPalette.500'
-                                        }
-                                    }}>
-                                    <span>
-                                        <Avatar src={'../avt-light.svg'} fallback={''} _hover={{cursor: 'pointer'}}/>
-                                    </span>
-                                </Tooltip>
-                            </MenuTrigger>
-                            <MenuContent>
-                                <MenuItem value={'settings'}>Settings</MenuItem>
-                                <MenuItem value={'logout'}>Logout</MenuItem>
-                            </MenuContent>
-                        </MenuRoot>
+                                                    
                     </Flex>
                 </Flex>
             </Box>
