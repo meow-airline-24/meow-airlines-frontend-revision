@@ -37,7 +37,7 @@ export default function BookingBar() {
     }
 
     return (
-        <Box bg={'white'} borderRadius={16} width={1080} height={360}>
+        <Box bg={'white'} borderRadius={16} width={1080} height={360} borderWidth={1} zIndex={1}>
             <Flex align={'baseline'} width={'100%'}>
                 <Tabs.Root defaultValue="book" width={'inherit'} fitted variant={'enclosed'}>
                     <Tabs.List width={'100%'} borderTopLeftRadius={16} borderTopRightRadius={16} padding={2} gap={2} bg={'colorPalette.400'}>
@@ -70,7 +70,7 @@ export default function BookingBar() {
                     </Tabs.List>
                     <Tabs.Content value="book">
                         <Flex flexDirection={'column'} paddingLeft={6} paddingRight={6}>
-                            <RadioGroup aria-required variant={'outline'} value={TicketType} onValueChange={(e) => setTicketType(e.value)} asChild>
+                            <RadioGroup aria-required id={'ticket-type'} variant={'outline'} value={TicketType} onValueChange={(e) => setTicketType(e.value)} asChild>
                                 <HStack gap={8} position={'relative'} marginTop={4}>
                                     <Radio value='one-way' fontSize={'md'}>One way</Radio>
                                     <Radio value='round-trip' fontSize={'md'}>Round trip</Radio>
@@ -163,7 +163,7 @@ export default function BookingBar() {
                                             <Box height={'100%'} padding={2}>
                                                 <Field paddingLeft={1} paddingTop={3} fontSize={'lg'} fontWeight={'medium'} label={'To'} alignContent={'baseline'}>
                                                     <Flex position={'relative'} bottom={2} paddingRight={2} direction={'row'} align={'center'} width={'100%'}>
-                                                        <Text truncate width={'2/3'} color={'colorPalette.700'} id={'src-airport'}>{DestPort.label}</Text>
+                                                        <Text truncate width={'2/3'} color={'colorPalette.700'} id={'dest-airport'}>{DestPort.label}</Text>
                                                         {DestPort.value !== '' ? (
                                                             <Box marginLeft={2} paddingTop={1} paddingLeft={2} paddingRight={2} paddingBottom={1}
                                                                 width={'56px'} borderRadius={6} color={'white'} bgColor={'colorPalette.600'}
@@ -304,14 +304,14 @@ export default function BookingBar() {
                                             <Box height={'100%'} padding={2}>
                                                 <Field paddingLeft={1} paddingTop={3} fontSize={'lg'} fontWeight={'medium'} label={'Passenger'} alignContent={'baseline'}>
                                                     <Flex position={'relative'} direction={'row'} align={'center'} width={'100%'}>
-                                                        <Text color={'colorPalette.700'} id={'passenger-date'}>
+                                                        <Text color={'colorPalette.700'} id={'passenger-count'}>
                                                             {PassengerCount}
                                                         </Text>
                                                     </Flex>
                                                 </Field>
                                             </Box>
                                         </PopoverTrigger>
-                                        <PopoverContent width={240}>
+                                        <PopoverContent width={280}>
                                             <PopoverArrow />
                                             <PopoverBody>
                                                 <PopoverCloseTrigger id={'passenger-popover-close'} colorPalette={'blue'} />
@@ -332,7 +332,7 @@ export default function BookingBar() {
                                 </Box>
                             </HStack>
                             <HStack marginTop={8} justify={'space-between'}>
-                                <Button height={16} width={56} borderRadius={8} fontSize={'lg'} variant={'solid'} bg={'orange.400'}>
+                                <Button id={'search-flight'} height={16} width={56} borderRadius={8} fontSize={'lg'} variant={'solid'} bg={'orange.400'}>
                                     Search Flight
                                 </Button>
                                 <Tooltip content={'This functionality is currently unavailable'} 
