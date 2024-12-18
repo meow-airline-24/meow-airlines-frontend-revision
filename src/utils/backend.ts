@@ -10,7 +10,7 @@ import { Ticket } from "@/interfaces/Ticket";
 import { User } from "@/interfaces/User";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // For decoding the JWT token
-import { getAccessToken, setAccessToken } from "@/utils/cookieUtils"
+import { getAccessToken, setAccessToken, removeAccessToken } from "@/utils/cookieUtils"
 import { use } from "react";
 
 axios.defaults.withCredentials = true;
@@ -45,7 +45,7 @@ export async function processAccessToken(accessToken: string): Promise<string> {
     } else return accessToken
 }
 
-export async function register({ user, password }: { user: User, password: string }) {
+export async function register(user: User, password: string) {
     const res = await axios.post(
         API.USER.register,
         { email: user.email, password: password, name: user.name, gender: user.gender, dob: user.dob, id_type: user.id_type, id_number: user.id_number, country_code: user.country_code, phone: user.phone },
@@ -53,7 +53,7 @@ export async function register({ user, password }: { user: User, password: strin
     return
 }
 
-export async function login({ email, password }: { email: string, password: string }) {
+export async function login(email: string, password: string) {
     const res = await axios.post(
         API.AUTH.login,
         { email, password },
@@ -70,6 +70,56 @@ export async function getSelfInfo() {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
+    });
+    return res.data;
+}
+
+export async function logout() {
+    try {
+        const res = await axios.get(API.AUTH.logout);
+    } catch (err: any) {
+        console.log(err);
+        if (err.response && err.response.data && err.response.data.message) {
+            alert(err.response.data.message);
+        } else {
+            alert("An unexpected error occurred.");
+        }
+    }
+    removeAccessToken();
+    return
+}
+
+export async function editUser(user: User) {
+    const accessToken = getAccessToken();
+    const res = await axios.post(API.USER.edit, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+        email: user.email,
+        name: user.name,
+        gender: user.gender,
+        id_type: user.id_type,
+        id_number: user.id_number
+    });
+    return res.data;
+}
+
+export async function deleteUser() {
+    const accessToken = getAccessToken();
+    const res = await axios.delete(API.USER.delete, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return res.data;
+}
+
+export async function flightSearch(flight: Flight, number_people: number) {
+    const res = await axios.post(API.FLIGHT.search, {
+        departure_airport: flight.departure_airport,
+        arrival_airport: flight.arrival_airport,
+        departure_time: flight.departure_time,
+        number_people: number_people
     });
     return res.data;
 }

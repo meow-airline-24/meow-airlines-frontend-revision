@@ -20,6 +20,7 @@ import {
   MenuTrigger,
 } from "@/components/ui/menu";
 import { Tooltip } from "@/components/ui/tooltip";
+import { logout } from "@/utils/backend";
 
 export const NavItem = forwardRef<HTMLButtonElement, ButtonProps>(
   function NavItem(props, ref) {
@@ -85,6 +86,11 @@ export default function NavBar() {
       </Button>
     );
   };
+
+  async function handleLogOut() {
+    await logout();
+    router.push("/");
+  }
 
   return (
     <>
@@ -166,7 +172,9 @@ export default function NavBar() {
                   </MenuTrigger>
                   <MenuContent>
                     <MenuItem value={"settings"}>Settings</MenuItem>
-                    <MenuItem value={"logout"}>Logout</MenuItem>
+                    <MenuItem value={"logout"} onClick={handleLogOut}>
+                      Logout
+                    </MenuItem>
                   </MenuContent>
                 </MenuRoot>
               </>

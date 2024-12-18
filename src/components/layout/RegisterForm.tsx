@@ -86,13 +86,13 @@ export default function RegisterForm() {
 
     try {
       console.log(user);
-      await register({
-        user: {
+      await register(
+        {
           ...user,
           role: "customer",
         },
-        password,
-      });
+        password
+      );
       alert("Registration successful, heading to login page!");
       setError(null);
       router.push("/login");

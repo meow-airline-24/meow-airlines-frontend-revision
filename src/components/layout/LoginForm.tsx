@@ -36,7 +36,7 @@ export default function LoginForm() {
 
   const handleLogin = async () => {
     try {
-      await login({ email, password });
+      await login(email, password);
       setError(null);
       router.push("/");
     } catch (err: any) {
