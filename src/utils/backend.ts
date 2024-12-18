@@ -124,6 +124,11 @@ export async function flightSearch(flight: Flight, number_people: number) {
     return res.data;
 }
 
+export async function getFlightById(id: string) {
+    const res = await axios.get(API.FLIGHT.flightId(id));
+    return res.data;
+}
+
 // export async function getPublicInfo() {
 //     const res = await axiosInstance.get(API.PUBLIC.info);
 //     return res.data;
