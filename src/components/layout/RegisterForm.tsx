@@ -58,8 +58,18 @@ export default function RegisterForm() {
       setError("Passwords do not match.");
       return;
     }
-    console.log(countryCode[0]);
-    if (!dob || gender == null || !idType || !countryCode[0]) {
+    // console.log(countryCode[0]);
+    if (
+      !dob ||
+      gender == null ||
+      !idType ||
+      !countryCode[0] ||
+      !name ||
+      !email ||
+      !password ||
+      !idNumber
+    ) {
+      setError("Please fill in all fields");
       return;
     }
 
@@ -76,16 +86,16 @@ export default function RegisterForm() {
 
     try {
       console.log(user);
-      //   await register({
-      //     user: {
-      //       ...user,
-      //       role: "customer",
-      //     },
-      //     password,
-      //   });
-      alert("Registration successful!");
+      await register({
+        user: {
+          ...user,
+          role: "customer",
+        },
+        password,
+      });
+      alert("Registration successful, heading to login page!");
       setError(null);
-      //   router.push("/login");
+      router.push("/login");
     } catch (err: any) {
       if (err.response?.data?.message) {
         setError(err.response.data.message);
@@ -276,7 +286,12 @@ export default function RegisterForm() {
                         ></Input>
                       </Group>
                     </Field>
-
+                    {/* error field from request */}
+                    {error && (
+                      <Text color="red.500" fontSize="sm" marginBottom={4}>
+                        {error}
+                      </Text>
+                    )}
                     <Button
                       width={"100%"}
                       marginTop={6}
