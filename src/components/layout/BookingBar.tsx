@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Box, Flex, HStack, IconButton, Input, Tabs, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import { Alert, Box, Flex, HStack, IconButton, Input, Tabs, Text } from '@chakra-ui/react'
 import { Button } from '@/components/ui/button'
 import { CloseButton } from '@/components/ui/close-button'
 import { Field } from '@/components/ui/field'
@@ -18,6 +19,7 @@ export default function BookingBar() {
     const [DepartDate, setDepartDate] = useState('yyyy-mm-dd')
     const [ReturnDate, setReturnDate] = useState('yyyy-mm-dd')
     const [PassengerCount, setPassengerCount] = useState(1)
+    const router = useRouter();
 
     const getTodayInString = () => {
         var today = new Date();
@@ -34,6 +36,26 @@ export default function BookingBar() {
         var dd = date.slice(8, 10)
 
         return dd + '/' + mm + '/' + yyyy
+    }
+
+    const handleSearchFlight = () => {
+        if (SourcePort.label !== '' && DestPort.label !== '' && DepartDate !== 'yyyy-mm-dd') {
+            sessionStorage.setItem('TicketType', TicketType)
+            sessionStorage.setItem('SourcePort.label', SourcePort.label)
+            sessionStorage.setItem('SourcePort.value', SourcePort.value)
+            sessionStorage.setItem('DestPort.label', DestPort.label)
+            sessionStorage.setItem('DestPort.value', DestPort.value)
+            sessionStorage.setItem('DepartDate', DepartDate)
+            sessionStorage.setItem('PassengerCount', String(PassengerCount))
+            
+            if (TicketType === 'one-way' || (TicketType === 'round-trip' && ReturnDate !== 'yyyy-mm-dd')) {
+                sessionStorage.setItem('ReturnDate', ReturnDate)
+                router.push('/booking')
+                return
+            }
+        } 
+
+        alert('Please fill in all fields before searching for flight')
     }
 
     return (
@@ -332,7 +354,7 @@ export default function BookingBar() {
                                 </Box>
                             </HStack>
                             <HStack marginTop={8} justify={'space-between'}>
-                                <Button id={'search-flight'} height={16} width={56} borderRadius={8} fontSize={'lg'} variant={'solid'} bg={'orange.400'}>
+                                <Button onClick={handleSearchFlight} id={'search-flight'} height={16} width={56} borderRadius={8} fontSize={'lg'} variant={'solid'} bg={'orange.400'}>
                                     Search Flight
                                 </Button>
                                 <Tooltip content={'This functionality is currently unavailable'} 
