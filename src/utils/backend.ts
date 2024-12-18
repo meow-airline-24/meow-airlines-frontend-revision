@@ -114,14 +114,18 @@ export async function deleteUser() {
     return res.data;
 }
 
-export async function flightSearch(flight: Flight, number_people: number) {
-    const res = await axios.post(API.FLIGHT.search, {
-        departure_airport: flight.departure_airport,
-        arrival_airport: flight.arrival_airport,
-        departure_time: flight.departure_time,
-        number_people: number_people
-    });
-    return res.data;
+export async function flightSearch(flight: any, number_people: number) {
+    try {
+        const res = await axios.post(API.FLIGHT.search, {
+            departure_airport: flight.departure_airport,
+            arrival_airport: flight.arrival_airport,
+            departure_time: flight.departure_time,
+            number_people: number_people
+        });
+        return res.data?.flights;
+    } catch {
+        return null;
+    }
 }
 
 export async function getFlightById(id: string) {
