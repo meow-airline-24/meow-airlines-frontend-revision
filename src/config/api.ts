@@ -1,3 +1,6 @@
+import { count } from "console";
+import { create } from "domain";
+
 export const BASE_API_URL = process.env.PUBLIC_API_URL;
 
 const AUTH = {
@@ -16,7 +19,9 @@ const USER = {
 
 const FLIGHT = {
     search: `${BASE_API_URL}/flight/search`,
-    flightId: (flightId: number | string) => `${BASE_API_URL}/flight/${flightId}`
+    flightId: (flightId: number | string) => `${BASE_API_URL}/flight/${flightId}`,
+    create: `${BASE_API_URL}/flight/create`,
+    edit: `${BASE_API_URL}/flight/edit`,
 }
 
 const BOOKING = {
@@ -28,7 +33,14 @@ const BOOKING = {
 const TICKET = {
     edit: `${BASE_API_URL}/ticket/edit`,
     public_search: `${BASE_API_URL}/ticket/public_search`,
-    public_edit: `${BASE_API_URL}/ticket/public_edit`
+    public_edit: `${BASE_API_URL}/ticket/public_edit`,
+    search: `${BASE_API_URL}/ticket/search`,
+    count: `${BASE_API_URL}/ticket/count`,
+}
+
+const AIRCRAFT = {
+    create: `${BASE_API_URL}/aircraft/create`,
+    edit: `${BASE_API_URL}/aircraft/edit`,
 }
 
 export const API = {
@@ -36,5 +48,6 @@ export const API = {
     USER,
     FLIGHT,
     BOOKING,
-    TICKET
+    TICKET,
+    AIRCRAFT
 }

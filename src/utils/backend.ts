@@ -133,6 +133,11 @@ export async function getFlightById(id: string) {
     return res.data;
 }
 
+export async function getTicketCount() {
+    const res = await axios.get(API.TICKET.count);
+    return res.data;
+}
+
 // export async function getPublicInfo() {
 //     const res = await axiosInstance.get(API.PUBLIC.info);
 //     return res.data;
