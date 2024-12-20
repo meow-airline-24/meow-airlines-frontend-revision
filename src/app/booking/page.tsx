@@ -1,9 +1,8 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import NavBar from "@/components/layout/NavBar";
 import { Box, Flex } from "@chakra-ui/react";
-import FlightTab from "@/components/layout/FlightTab";
+import NavBar from "@/components/layout/NavBar";
 
 export default function Booking() {
   const searchParams = useSearchParams();
@@ -38,7 +37,6 @@ export default function Booking() {
           {DaysOfWeek[day.getUTCDay()]}
         </Box>
       </Flex>
-      <FlightTab></FlightTab>
     </>
   );
 }
