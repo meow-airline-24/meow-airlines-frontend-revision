@@ -23,7 +23,7 @@ export default function BlogSection() {
     const [loading, setLoading] = useState(true)
     const [posts, setPosts] = useState<Post[]>([]);
     const [postId, setPostId] = useState<string | null>(null);
-    
+
     const handleButtonClick = (page : number) => {
         setPage(page)
 
@@ -39,7 +39,10 @@ export default function BlogSection() {
                 (response) => {
                     setPosts(response);
                 }
-            ).finally(() => {setLoading(false)}
+            ).finally(() => {
+                setLoading(false)
+                handleButtonClick(1)
+            }
         )} catch (error) {
             console.error("Error fetching posts:", error);
         }
@@ -49,7 +52,7 @@ export default function BlogSection() {
     }, []);
 
     return (
-        <Box width={1080} height={840} bg={'white'} borderRadius={8} borderWidth={1}>
+        <Box width={960} height={640} bg={'white'} borderRadius={8} borderWidth={1}>
             {loading ? (
                 <Flex paddingTop={12} align={'center'} direction={'column'}>
                 <VStack marginTop={12}>
@@ -79,7 +82,7 @@ export default function BlogSection() {
                             width={'100%'}
                             justifyItems={'center'}
                             marginTop={4}
-                            count={20}
+                            count={posts.length}
                             pageSize={1}
                             page={page}
                             onPageChange={(e) => {handleButtonClick(e.page)}}
