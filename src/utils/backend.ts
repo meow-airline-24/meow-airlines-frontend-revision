@@ -210,7 +210,7 @@ export async function createFlight(flight: Flight) {
 
     const res = await axios.post(
         API.FLIGHT.create,
-        { _id:flight._id, flight_number: flight.flight_number, airline: flight.airline, departure_airport: flight.departure_airport, arrival_airport: flight.arrival_airport, departure_time: flight.departure_time, arrival_time: flight.arrival_time, book_exp: flight.book_exp, aircraft_id: flight.aircraft_id },
+        { _id: flight._id, flight_number: flight.flight_number, airline: flight.airline, departure_airport: flight.departure_airport, arrival_airport: flight.arrival_airport, departure_time: flight.departure_time, arrival_time: flight.arrival_time, book_exp: flight.book_exp, aircraft_id: flight.aircraft_id },
         {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -225,7 +225,38 @@ export async function editFlight(flight: Flight) {
 
     const res = await axios.post(
         API.FLIGHT.edit,
-        { _id:flight._id, flight_number: flight.flight_number, airline: flight.airline, departure_airport: flight.departure_airport, arrival_airport: flight.arrival_airport, departure_time: flight.departure_time, arrival_time: flight.arrival_time, book_exp: flight.book_exp, aircraft_id: flight.aircraft_id },
+        { _id: flight._id, flight_number: flight.flight_number, airline: flight.airline, departure_airport: flight.departure_airport, arrival_airport: flight.arrival_airport, departure_time: flight.departure_time, arrival_time: flight.arrival_time, book_exp: flight.book_exp, aircraft_id: flight.aircraft_id },
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+
+    return res.data;
+}
+
+export async function createAircraft(aircraft: Aircraft) {
+    const accessToken = await getAccessToken();
+
+    const res = await axios.post(
+        API.AIRCRAFT.create,
+        { _id: aircraft._id, model: aircraft.model, manufacture_year: aircraft.manufacture_year, status: aircraft.status },
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+
+    return res.data;
+}
+export async function editAircraft(aircraft: Aircraft) {
+    const accessToken = await getAccessToken();
+
+    const res = await axios.post(
+        API.AIRCRAFT.edit,
+        { _id: aircraft._id, model: aircraft.model, manufacture_year: aircraft.manufacture_year, status: aircraft.status },
         {
             headers: {
                 Authorization: `Bearer ${accessToken}`,

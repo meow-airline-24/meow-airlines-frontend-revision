@@ -68,7 +68,7 @@ export default function CommunicationForm() {
             >
               <VStack width={"100%"}>
                 <Text width={"100%"} borderBottomWidth={1} textAlign={"center"}>
-                  User Information
+                  Contact Information
                 </Text>
                 <HStack width={"100%"} align={"baseline"} gap={6}>
                     <VStack width={"50%"}>
