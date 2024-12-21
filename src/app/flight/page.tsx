@@ -47,13 +47,13 @@ export default function FlightPage() {
       departure_time: new Date(data.DepartDate),
     };
 
-    // Empty flight list to evade duplication of flights
-    setFlightList([])
-
     const fetchFlights = async () => {
       try {
         const res = await flightSearch(flight, data.PassengerCount)
           .then((res) => {
+            // Empty flight list to evade duplication of flights
+            setFlightList([])
+
             if (res !== null) {
               res.forEach((element: { flight: Flight; prices: any }) => {
                 FlightList.push(element);
