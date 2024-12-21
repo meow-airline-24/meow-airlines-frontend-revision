@@ -31,6 +31,7 @@ export default function FlightTab(props: { key: string; FlightData: Flight; Flig
   }
 
   const handleBookingClass = (SeatClass : string) => {
+    console.log('Booking class:', FlightData)
     sessionStorage.setItem('Airline', FlightData.airline)
     sessionStorage.setItem('FlightNumber', FlightData.flight_number)
     sessionStorage.setItem('FlightID', FlightData._id)

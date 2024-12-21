@@ -97,14 +97,20 @@ export default function Booking() {
 			name: passenger_name.value || "undefined",
 			gender: passenger_gender?.value || "undefined",
 			dob: passenger_dob.value || "undefined",
-			country: passenger_country.innerText || "undefined",
+			country_code: passenger_country.innerText || "undefined",
 			id_type: passenger_id_type?.value || "undefined",
 			id_num: passenger_id_num.value || "undefined",
 		})
 	}
-
-	console.log(CommunicationDetails)
-	console.log(PassengerDetails)
+	const travelDetails = {
+		itinerary: [sessionStorage.getItem("FlightID")],
+		type: sessionStorage.getItem("TicketType"),
+		flightClass: [sessionStorage.getItem("SeatClass")],
+		email: CommunicationDetails.email,
+		phone: CommunicationDetails.phone,
+		passengers: PassengerDetails,
+	  };
+	console.log(travelDetails)
   }
 
   return (
