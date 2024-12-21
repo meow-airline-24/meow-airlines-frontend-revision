@@ -19,7 +19,8 @@ const Sidebar = () => {
         padding: "20px",
         display: "flex",
         flexDirection: "column",
-        height: "100vh",
+        minHeight: "100vh",
+        height: "125vh",
       }}
     >
       <h2 style={{ fontSize: "1.5rem", marginBottom: "20px" }}>Admin Panel</h2>

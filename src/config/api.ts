@@ -22,6 +22,7 @@ const FLIGHT = {
     flightId: (flightId: number | string) => `${BASE_API_URL}/flight/${flightId}`,
     create: `${BASE_API_URL}/flight/create`,
     edit: `${BASE_API_URL}/flight/edit`,
+    getall: `${BASE_API_URL}/flight/getall`
 }
 
 const BOOKING = {
@@ -41,6 +42,7 @@ const TICKET = {
 const AIRCRAFT = {
     create: `${BASE_API_URL}/aircraft/create`,
     edit: `${BASE_API_URL}/aircraft/edit`,
+    getall: `${BASE_API_URL}/aircraft/getall`
 }
 
 const POST = {

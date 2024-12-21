@@ -144,7 +144,6 @@ export async function getTicketCount() {
 
 export async function createPost(title: any, content: any) {
     const accessToken = await getAccessToken();
-    console.log(accessToken);
 
     const res = await axios.post(
         API.POST.create,
@@ -167,7 +166,6 @@ export async function getPostById(postId: string) {
 
 export async function createBooking(input: any) {
     const accessToken = await getAccessToken();
-    console.log(accessToken);
 
     const res = await axios.post(
         API.BOOKING.create,
@@ -184,5 +182,56 @@ export async function createBooking(input: any) {
 
 export async function getAllPosts() {
     const res = await axios.get(API.POST.getAll);
+    return res.data;
+}
+
+export async function getAllFlights() {
+    const accessToken = await getAccessToken();
+    const res = await axios.get(API.FLIGHT.getall, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return res.data;
+}
+
+export async function getAllAircrafts() {
+    const accessToken = await getAccessToken();
+    const res = await axios.get(API.AIRCRAFT.getall, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return res.data;
+}
+
+export async function createFlight(flight: Flight) {
+    const accessToken = await getAccessToken();
+
+    const res = await axios.post(
+        API.FLIGHT.create,
+        { flight },
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+
+    return res.data;
+}
+export async function editFlight(flight: Flight) {
+    const accessToken = await getAccessToken();
+
+    const res = await axios.post(
+        API.FLIGHT.edit,
+        { _id:flight._id, flight_number: flight.flight_number, airline: flight.airline, departure_airport: flight.departure_airport, arrival_airport: flight.arrival_airport, departure_time: flight.departure_time, arrival_time: flight.arrival_time, book_exp: flight.book_exp, aircraft_id: flight.aircraft_id },
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+
     return res.data;
 }
