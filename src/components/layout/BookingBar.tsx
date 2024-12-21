@@ -59,7 +59,7 @@ export default function BookingBar() {
     }
 
     return (
-        <Box bg={'white'} borderRadius={16} width={1080} height={360} borderWidth={1} zIndex={1}>
+        <Box bg={'white'} borderRadius={16} width={1080} height={360} borderWidth={1} zIndex={1} id={'book'}>
             <Flex align={'baseline'} width={'100%'}>
                 <Tabs.Root defaultValue="book" width={'inherit'} fitted variant={'enclosed'}>
                     <Tabs.List width={'100%'} borderTopLeftRadius={16} borderTopRightRadius={16} padding={2} gap={2} bg={'colorPalette.400'}>

@@ -15,7 +15,7 @@ export const TicketCard = forwardRef<HTMLImageElement, ImageProps> (
 
         return (
             <Box maxW={"xs"} borderWidth={"1px"} borderRadius={8} bg={'white'}>
-                <Image borderTopRadius={8} src={src} alt={alt} ref={ref} {...rest} />
+                <Image width={'320px'} height={'187px'} borderTopRadius={8} src={src} alt={alt} ref={ref} {...rest} />
                 <Box padding={"6"}>
                     {data !== undefined ? (
                         <>

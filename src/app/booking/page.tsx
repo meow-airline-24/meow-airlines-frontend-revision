@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Box, Flex, Icon, HStack, VStack, Text, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Icon, Link, HStack, VStack, Text, Spinner } from "@chakra-ui/react";
 import { Button } from "@/components/ui/button";
-import { LuPlaneTakeoff } from "react-icons/lu";
+import { EmptyState } from "@/components/ui/empty-state";
+import { LuPlaneTakeoff, LuTicketsPlane } from "react-icons/lu";
 import NavBar from "@/components/layout/NavBar";
 import PassengerForm from '@/components/layout/PassengerForm'
 import CommunicationForm from "@/components/layout/CommunicationForm";
@@ -25,6 +26,7 @@ export default function Booking() {
     const SessionStorageData = {
       TicketType: sessionStorage.getItem("TicketType") || 'none',
       Airline: sessionStorage.getItem("Airline") || 'none',
+	  FlightID: sessionStorage.getItem("FlightID") || 'none',
       FlightNumber: sessionStorage.getItem("FlightNumber") || 'none',
       SourcePort: {
         label: sessionStorage.getItem("SourcePort.label") || 'none',
@@ -57,7 +59,7 @@ export default function Booking() {
     setTicketData(SessionStorageData)
     setLoading(false)
     
-  }, [])
+  }, [loading])
 
   // console.log(TicketData)
 
@@ -117,52 +119,82 @@ export default function Booking() {
             </Flex>
         ) : (
           <VStack align={'center'}>
-            <Text fontSize={'lg'} fontWeight={'medium'} color={'colorPalette.700'}>Please fill in the information below to finish booking</Text>
-            <Flex width={920} paddingLeft={6} paddingRight={6} align={'center'} direction={'column'}>
-              <HStack alignSelf={'normal'} justify={'space-between'}>
-                <VStack color={'gray.600'} minWidth={'200px'} alignItems={'flex-start'}>
-                  <Flex direction={'row'} spaceX={1}>
-                    <Text>Depart from:</Text>
-                    <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.SourcePort.label}</Text>
-                  </Flex>
-                  <Flex direction={'row'} spaceX={1}>
-                    <Text>At time:</Text>
-                    <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.DepartDate.hour} (UTC)</Text>
-                  </Flex>
-                </VStack>
-                <Text color={'colorPalette.700'} fontSize={'2xl'}>
-                . . . . .. ... .....
-                <Icon position={'relative'} bottom={'9px'} size={'2xl'} color={'colorPalette.700'}>
-                  <LuPlaneTakeoff />
-                </Icon>
-                ..... ... .. . . . .
-                </Text>
-                <VStack color={'gray.600'} minWidth={'200px'} alignItems={'flex-end'}>
-                  <Flex direction={'row'} spaceX={1}>
-                    <Text>Leave for:</Text>
-                    <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.DestPort.label}</Text>
-                  </Flex>
-                  <Flex direction={'row'} spaceX={1}>
-                    <Text>At time:</Text>
-                    <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.ArrivalDate.hour} (UTC)</Text>
-                  </Flex>
-                </VStack>
-              </HStack>
-              <Flex direction={'row'} fontSize={'sm'} spaceX={1} color={'gray.600'}>
-                <Text>Flight</Text>
-                <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.FlightNumber}</Text>
-                <Text>provided by </Text>
-                <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.Airline}</Text>
-              </Flex>
-            </Flex>
-            <CommunicationForm />
-            <Text marginTop={8} marginBottom={4} fontSize={'xl'} color='colorPalette.700' width={'100%'} borderBottomWidth={1} textAlign={'center'} fontWeight={'medium'}>
-              Please provide the personal information of each passenger
-            </Text>
-            {PassengerFormList}
-            <Button size={'2xl'} marginTop={12} marginBottom={72} width={360} onClick={handleSubmitInformation}>
-              Submit Information
-            </Button>
+			{TicketData.BookExpireDate === null ? (
+				<EmptyState
+				  icon={<LuTicketsPlane />}
+				  color={'blue.700'}
+				  size={'lg'}
+				  title={"There is nothing to book!"}
+				  description={"You have not selected any flight plans"}
+				>
+				  <Button
+					  marginTop={'6px'}
+					  size={'lg'}
+					  fontSize={'lg'}
+					  bg={'colorPalette.500'}
+					  borderColor={'colorPalette.600'}
+					  borderWidth={2}
+					  _hover={{
+						bg: 'colorPalette.400',
+					  }} asChild>
+					  <Link href={'/#book'} textDecoration={'none'}>Book now</Link>
+				  </Button>
+				</EmptyState>
+			) : (
+				<>
+					<Text fontSize={'lg'} fontWeight={'medium'} color={'colorPalette.700'}>Please fill in the information below to finish booking</Text>
+
+					<Flex width={920} paddingLeft={6} paddingRight={6} align={'center'} direction={'column'}>
+						<HStack alignSelf={'normal'} justify={'space-between'}>
+							<VStack color={'gray.600'} minWidth={'200px'} alignItems={'flex-start'}>
+							<Flex direction={'row'} spaceX={1}>
+								<Text>Depart from:</Text>
+								<Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.SourcePort.label}</Text>
+							</Flex>
+							<Flex direction={'row'} spaceX={1}>
+								<Text>At time:</Text>
+								<Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.DepartDate.hour} (UTC)</Text>
+							</Flex>
+							</VStack>
+							<Text color={'colorPalette.700'} fontSize={'2xl'}>
+							. . . . .. ... .....
+							<Icon position={'relative'} bottom={'9px'} size={'2xl'} color={'colorPalette.700'}>
+							<LuPlaneTakeoff />
+							</Icon>
+							..... ... .. . . . .
+							</Text>
+							<VStack color={'gray.600'} minWidth={'200px'} alignItems={'flex-end'}>
+							<Flex direction={'row'} spaceX={1}>
+								<Text>Leave for:</Text>
+								<Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.DestPort.label}</Text>
+							</Flex>
+							<Flex direction={'row'} spaceX={1}>
+								<Text>At time:</Text>
+								<Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.ArrivalDate.hour} (UTC)</Text>
+							</Flex>
+							</VStack>
+						</HStack>
+						<Flex direction={'row'} fontSize={'sm'} spaceX={1} color={'gray.600'}>
+							<Text>Flight</Text>
+							<Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.FlightNumber}</Text>
+							<Text>provided by </Text>
+							<Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.Airline}</Text>
+						</Flex>
+					</Flex>
+
+					<CommunicationForm />
+
+					<Text marginTop={8} marginBottom={4} fontSize={'xl'} color='colorPalette.700' width={'100%'} borderBottomWidth={1} textAlign={'center'} fontWeight={'medium'}>
+						Please provide the personal information of each passenger
+					</Text>
+
+					{PassengerFormList}
+
+					<Button size={'2xl'} marginTop={12} marginBottom={72} width={360} onClick={handleSubmitInformation}>
+						Submit Information
+					</Button>
+				</>
+			)}
           </VStack>
         )}
       </Box>

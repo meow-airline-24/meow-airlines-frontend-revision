@@ -33,6 +33,7 @@ export default function FlightTab(props: { key: string; FlightData: Flight; Flig
   const handleBookingClass = (SeatClass : string) => {
     sessionStorage.setItem('Airline', FlightData.airline)
     sessionStorage.setItem('FlightNumber', FlightData.flight_number)
+    sessionStorage.setItem('FlightID', FlightData._id)
     sessionStorage.setItem('SeatClass', SeatClass)
     sessionStorage.setItem('SeatPrice', FlightPrice[SeatClass as keyof Price].toString())
     sessionStorage.setItem('DepartTimeUTC', getUTCTime(DepartDate))
