@@ -187,7 +187,7 @@ const FlightFields = ({
             />
           </div>
 
-          {/* Aircraft Model */}
+          {/* Aircraft ID */}
           <div>
             <label htmlFor="aircraft_id">Aircraft</label>
             <Input
@@ -195,7 +195,7 @@ const FlightFields = ({
               name="aircraft_id"
               value={flight.aircraft_id || ""}
               onChange={handleChange}
-              placeholder="Enter aircraft model"
+              placeholder="Enter aircraft ID"
               required
             />
           </div>

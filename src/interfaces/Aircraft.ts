@@ -1,7 +1,8 @@
 import { AircraftModel } from "./AircraftModel";
 
 export type Aircraft = {
-    model: AircraftModel;
+    _id: string;
+    model: string;
     manufacture_year: number;
     status: "Active" | "Inactive";
 }
