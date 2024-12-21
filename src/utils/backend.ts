@@ -8,6 +8,7 @@ import { Flight } from "@/interfaces/Flight";
 import { Seat } from "@/interfaces/Seat";
 import { Ticket } from "@/interfaces/Ticket";
 import { User } from "@/interfaces/User";
+import { Post } from "@/interfaces/Post";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // For decoding the JWT token
 import { getAccessToken, setAccessToken, removeAccessToken } from "@/utils/cookieUtils"
@@ -65,7 +66,7 @@ export async function login(email: string, password: string) {
 }
 
 export async function getSelfInfo() {
-    const accessToken = getAccessToken();
+    const accessToken = await getAccessToken();
     const res = await axios.get(API.USER.info, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -90,7 +91,7 @@ export async function logout() {
 }
 
 export async function editUser(user: User) {
-    const accessToken = getAccessToken();
+    const accessToken = await getAccessToken();
     const res = await axios.post(API.USER.edit, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -105,7 +106,7 @@ export async function editUser(user: User) {
 }
 
 export async function deleteUser() {
-    const accessToken = getAccessToken();
+    const accessToken = await getAccessToken();
     const res = await axios.delete(API.USER.delete, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -136,6 +137,29 @@ export async function getFlightById(id: string) {
 export async function getTicketCount() {
     const res = await axios.get(API.TICKET.count);
     return res.data;
+}
+
+export async function createPost(title: any, content: any) {
+    const accessToken = await getAccessToken();
+    console.log(accessToken);
+
+    const res = await axios.post(
+        API.POST.create,
+        { title, content },
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+
+    return res.data;
+}
+
+export async function getPostById(postId: string) {
+    const response = await axios.get(API.POST.postId(postId));
+    const post: Post = response.data;
+    return post;
 }
 
 // export async function getPublicInfo() {

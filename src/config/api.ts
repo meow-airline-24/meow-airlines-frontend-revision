@@ -43,11 +43,17 @@ const AIRCRAFT = {
     edit: `${BASE_API_URL}/aircraft/edit`,
 }
 
+const POST = {
+    create: `${BASE_API_URL}/post/create`,
+    postId: (postId: number | string) => `${BASE_API_URL}/post/${postId}`,
+}
+
 export const API = {
     AUTH,
     USER,
     FLIGHT,
     BOOKING,
     TICKET,
-    AIRCRAFT
+    AIRCRAFT,
+    POST
 }
