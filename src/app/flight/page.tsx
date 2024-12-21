@@ -52,7 +52,11 @@ export default function FlightPage() {
         const res = await flightSearch(flight, data.PassengerCount)
           .then((res) => {
             if (res !== null) {
-              setFlightList(res)
+              res.forEach((element: { flight: Flight; prices: any }) => {
+                FlightList.push(element);
+                // console.log(element.flight);
+                // console.log(element.prices);
+              })
             }
           })
           .finally(() => setLoading(false));
