@@ -269,7 +269,7 @@ export async function editAircraft(aircraft: Aircraft) {
 
 export async function ticketPublicSearch(ticket_id: string, id_type: string, id_number: string) {
     const res = await axios.post(API.TICKET.public_search, {
-        ticket_id, id_type, id_number
+        _id: ticket_id, id_type, id_number
     });
     return res.data
 }

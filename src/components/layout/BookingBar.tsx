@@ -13,6 +13,8 @@ import { PopoverArrow, PopoverBody, PopoverCloseTrigger ,PopoverContent, Popover
 import { Tooltip } from '@/components/ui/tooltip'
 import { LuPlane, LuCalendar, LuArrowLeftRight } from 'react-icons/lu'
 import { LiaIdCard } from 'react-icons/lia'
+import { ticketPublicSearch } from '@/utils/backend'
+import { Ticket } from '@/interfaces/Ticket'
 
 export default function BookingBar() {
     const [TicketType, setTicketType] = useState("one-way");
@@ -63,10 +65,9 @@ export default function BookingBar() {
         alert('Please fill in all fields before searching for flight')
     }
 
-    const handleTicketSearch = () => {
-        console.log(TicketNumber)
-        console.log(IdType)
-        console.log(IdNumber)
+    const handleTicketSearch = async () => {
+        const ticket:Ticket = await ticketPublicSearch(TicketNumber, IdType, IdNumber)
+        console.log(ticket)
     }
 
     return (

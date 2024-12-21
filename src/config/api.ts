@@ -33,8 +33,8 @@ const BOOKING = {
 
 const TICKET = {
     edit: `${BASE_API_URL}/ticket/edit`,
-    public_search: `${BASE_API_URL}/ticket/public_search`,
-    public_edit: `${BASE_API_URL}/ticket/public_edit`,
+    public_search: `${BASE_API_URL}/ticket/public-search`,
+    public_edit: `${BASE_API_URL}/ticket/public-edit`,
     search: `${BASE_API_URL}/ticket/search`,
     count: `${BASE_API_URL}/ticket/count`,
 }
