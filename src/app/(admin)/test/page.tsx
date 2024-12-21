@@ -26,6 +26,7 @@ export default function Test() {
         status: "Active",
     }
     const flight : Flight = {
+        _id: '1870147uh123788adf',
         flight_number: 'A123',
         airline: 'MEOW',
         departure_airport: 'HAN',
@@ -33,7 +34,7 @@ export default function Test() {
         departure_time: new Date() ,
         arrival_time: new Date(),
         book_exp: new Date(),
-        aircraft_id: aircraftA,
+        aircraft_id: 'aaa'
     }
     const price : Price = {
         First: 100,
