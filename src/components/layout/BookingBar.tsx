@@ -13,7 +13,6 @@ import { PopoverArrow, PopoverBody, PopoverCloseTrigger ,PopoverContent, Popover
 import { Tooltip } from '@/components/ui/tooltip'
 import { LuPlane, LuCalendar, LuArrowLeftRight } from 'react-icons/lu'
 import { LiaIdCard } from 'react-icons/lia'
-import { ticketPublicSearch } from '@/utils/backend'
 import { Ticket } from '@/interfaces/Ticket'
 
 export default function BookingBar() {
@@ -66,8 +65,11 @@ export default function BookingBar() {
     }
 
     const handleTicketSearch = async () => {
-        const ticket:Ticket = await ticketPublicSearch(TicketNumber, IdType, IdNumber)
-        console.log(ticket)
+        sessionStorage.setItem('TicketSearch.TicketNumber', TicketNumber)
+        sessionStorage.setItem('TicketSearch.IdType', IdType)
+        sessionStorage.setItem('TicketSearch.IdNumber', IdNumber)
+
+        router.push("/booking/my-booking")
     }
 
     return (

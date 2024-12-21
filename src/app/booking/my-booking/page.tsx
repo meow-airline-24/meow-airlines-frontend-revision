@@ -8,24 +8,31 @@ import { LuTicketsPlane } from "react-icons/lu";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import TicketTab from "@/components/layout/TicketTab";
+import { ticketPublicSearch } from '@/utils/backend'
 import { Ticket } from "@/interfaces/Ticket";
 
 export default function MyBooking() {
     const [TicketData, setTicketData] = useState<Ticket>()
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
-    const ticket = {
-        booking_id: "dadwhi",
-        status: "confirmed",
-        passenger_name: "ABC",
-        dob: new Date(),
-        gender: true,
-        id_type: "nin",
-        id_number: "12847324",
-        issuing_date: new Date(),
-        country_code: 111,
-        seat_id: ["a", "b"],
-    }
+    useEffect(() => {
+        const TicketNumber = sessionStorage.getItem('TicketSearch.TicketNumber') || ""
+        const IdType = sessionStorage.getItem('TicketSearch.IdType') || ""
+        const IdNumber = sessionStorage.getItem('TicketSearch.IdNumber') || ""
+        
+        const fetchTicketData = async () => {
+            try {
+            const response : Ticket = await ticketPublicSearch(TicketNumber, IdType, IdNumber);
+            setTicketData(response);
+            } catch (error) {
+            console.error("Error fetching posts:", error);
+            } finally {
+            setLoading(false);
+            }
+        };
+
+        fetchTicketData()
+    }, [])
 
     return (
         <Flex height={'100vh'} direction={'column'} justify={'space-between'}> 
@@ -65,9 +72,8 @@ export default function MyBooking() {
                         <>
                             <Text fontSize={'lg'} fontWeight={'medium'} color={'colorPalette.700'}>Your booking list</Text>
 
-                            {/* Uncomment to show ticket tab */}
                             <Flex marginTop={8}>
-                                <TicketTab TicketData={ticket} />
+                                {TicketData && <TicketTab TicketData={TicketData} />}
                             </Flex>
                         </>
                     )}
