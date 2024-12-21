@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { LuPlaneTakeoff, LuTicketsPlane } from "react-icons/lu";
 import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
 import PassengerForm from '@/components/layout/PassengerForm'
 import CommunicationForm from "@/components/layout/CommunicationForm";
 
@@ -107,7 +108,7 @@ export default function Booking() {
   }
 
   return (
-    <>
+    <Flex height={'100vh'} direction={'column'} justify={'space-between'}> 
       <NavBar />
       <Box width={'100vw'} height={'100vh'} minWidth={1080} marginTop={'80px'}>
         {loading ? (
@@ -198,6 +199,7 @@ export default function Booking() {
           </VStack>
         )}
       </Box>
-    </>
+	  <Footer />
+    </Flex>
   );
 }

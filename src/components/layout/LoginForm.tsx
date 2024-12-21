@@ -54,7 +54,6 @@ export default function LoginForm() {
       <Flex
         width={"vw"}
         minWidth={1080}
-        marginTop={"80px"}
         align={"center"}
         justify={"center"}
       >

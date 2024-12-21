@@ -110,7 +110,6 @@ export default function RegisterForm() {
       <Flex
         minW={1080}
         width={"vw"}
-        marginTop={"80px"}
         align={"center"}
         justify={"center"}
       >

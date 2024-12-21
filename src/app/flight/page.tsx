@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AbsoluteCenter, Box, Button, Flex, Link, Spinner, VStack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Spinner, VStack, Text } from "@chakra-ui/react";
 import { EmptyState } from "@/components/ui/empty-state";
 import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
 import FlightTab from "@/components/layout/FlightTab";
 import { FaPlaneSlash } from "react-icons/fa";
 import { flightSearch } from "@/utils/backend";
@@ -86,7 +87,7 @@ export default function FlightPage() {
   }
 
   return (
-    <>
+    <Flex height={'100vh'} direction={'column'} justify={'space-between'}>
       <NavBar />
       <Box width={'100vw'} height={'100vh'} minWidth={1080} marginTop={'80px'}>
         {loading ? (
@@ -143,6 +144,7 @@ export default function FlightPage() {
           </Box>
         )}
       </Box>
-    </>
+      <Footer />
+    </Flex>
   );
 }
