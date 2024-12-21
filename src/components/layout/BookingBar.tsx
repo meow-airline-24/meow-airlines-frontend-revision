@@ -50,7 +50,7 @@ export default function BookingBar() {
             
             if (TicketType === 'one-way' || (TicketType === 'round-trip' && ReturnDate !== 'yyyy-mm-dd')) {
                 sessionStorage.setItem('ReturnDate', ReturnDate)
-                router.push('/booking')
+                router.push('/flight')
                 return
             }
         } 
@@ -216,7 +216,7 @@ export default function BookingBar() {
                                                                 setDestPort(airport);
                                                                 document.getElementById('dest-popover-close')?.click();
                                                             }}
-                                                            _focus={{ backgroundColor: 'colorPalette.100' ,outlineWidth: 0 }}
+                                                            _focus={{ backgroundColor: 'colorPalette.100', outlineWidth: 0 }}
                                                             >
                                                             <Flex width={'inherit'} textAlign={'left'} direction={'row'} align={'center'} justify={'space-between'}>
                                                                 <Text truncate width={'3/4'} color={'colorPalette.700'}>
