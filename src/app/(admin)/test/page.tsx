@@ -53,11 +53,11 @@ export default function Test() {
         <Box bg='gray' w={'vw'} h={'vh'}>
             <AbsoluteCenter axis={'both'}>
                 <FlightTab key='abcdefghijk' FlightData={flight} FlightPrice={price} />
-                <Flex direction={'column'}>
+                {/* <Flex direction={'column'}>
                     <CommunicationForm />
                     
                     {PassengerFormList}
-                </Flex>
+                </Flex> */}
             </AbsoluteCenter>
         </Box>
     )

@@ -49,7 +49,7 @@ export default function FlightTab(props: { key: string; FlightData: Flight; Flig
       <HStack justify={'space-between'}> 
         <Flex width={'2/3'} paddingLeft={6} paddingRight={6} align={'center'} direction={'column'}>
           <HStack alignSelf={'normal'} justify={'space-between'}>
-            <VStack color={'gray.600'}>
+            <VStack color={'gray.600'} alignItems={'flex-start'}>
               <Flex direction={'row'} spaceX={1}>
                 <Text>Depart from:</Text>
                 <Text fontWeight={'medium'} color={'colorPalette.700'}>{FlightData.departure_airport}</Text>
@@ -66,7 +66,7 @@ export default function FlightTab(props: { key: string; FlightData: Flight; Flig
             </Icon>
             ..... ... .. . . . .
             </Text>
-            <VStack color={'gray.600'}>
+            <VStack color={'gray.600'} alignItems={'flex-end'}>
               <Flex direction={'row'} spaceX={1}>
                 <Text>Leave for:</Text>
                 <Text fontWeight={'medium'} color={'colorPalette.700'}>{FlightData.arrival_airport}</Text>

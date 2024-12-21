@@ -4,9 +4,7 @@ import { useState } from "react";
 import {
   Box,
   Flex,
-  Group,
   Input,
-  InputAddon,
   VStack,
   HStack,
   Text,
@@ -23,16 +21,14 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "@/components/ui/select";
-import { LuUser, LuPhone } from "react-icons/lu";
+import { LuUser } from "react-icons/lu";
 import { LiaIdCard } from "react-icons/lia";
 
 export default function PassengerForm(props: { formID : string }) {
   const { formID } = props
-  const [countryCode, setCountryCode] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [gender, setGender] = useState<boolean | null>(null);
   const [dob, setDob] = useState<Date | null>(null);
-  const [phone, setPhone] = useState("");
   const [idType, setIdType] = useState<"nin" | "passport" | null>(null); // State for ID type
   const [idNumber, setIdNumber] = useState<string>(""); // State for ID number
 
@@ -70,7 +66,7 @@ export default function PassengerForm(props: { formID : string }) {
                 <Text width={"100%"} borderBottomWidth={1} textAlign={"center"}>
                   Passenger Information
                 </Text>
-                <HStack width={"100%"} align={"baseline"} gap={6}>
+                <HStack width={"100%"} position={'relative'} align={"baseline"} gap={6}>
                   <VStack width={"33%"}>
                     <Field
                       label={"Full name"}
@@ -79,6 +75,7 @@ export default function PassengerForm(props: { formID : string }) {
                         <Input
                           type={"text"}
                           placeholder={"Your name"}
+                          id={'username'}
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                         ></Input>
@@ -88,6 +85,7 @@ export default function PassengerForm(props: { formID : string }) {
                     <Field label={"Gender"}>
                       <RadioGroup
                         value={gender === null ? undefined : gender.toString()}
+                        name={'gender'}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                           setGender(e.target.value == "true");
                         }}
@@ -112,6 +110,7 @@ export default function PassengerForm(props: { formID : string }) {
                       <Input
                         width={"inherit"}
                         type={"date"}
+                        id={'date-of-birth'}
                         value={dob ? dob.toISOString().split("T")[0] : ""}
                         onChange={(e) => setDob(new Date(e.target.value))}
                       ></Input>
@@ -119,13 +118,14 @@ export default function PassengerForm(props: { formID : string }) {
 
                     <SelectRoot
                       collection={countries}
-                      onValueChange={(e) => setCountryCode(e.value)}
+                      position={'relative'}
+                      id={'country-code-' + formID}
                     >
                       <SelectLabel>Country of origin</SelectLabel>
                       <SelectTrigger clearable>
                         <SelectValueText placeholder="Select country" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent position={'relative'}>
                         {countries.items.map((country) => (
                           <SelectItem item={country} key={country.value}>
                             {country.label}
@@ -133,33 +133,13 @@ export default function PassengerForm(props: { formID : string }) {
                         ))}
                       </SelectContent>
                     </SelectRoot>
-
-                    <Field
-                      label={"Phone"}
-                    >
-                      <Group width={"inherit"} gap={0}>
-                        <InputAddon>
-                          {countryCode.length === 0 ? (
-                            <LuPhone />
-                          ) : (
-                            <>{countryCode}</>
-                          )}
-                        </InputAddon>
-                        <Input
-                          placeholder={"Phone number"}
-                          type={"tel"}
-                          pattern={"[0-9]{12}"}
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                        ></Input>
-                      </Group>
-                    </Field>
                   </VStack>
 
                   <VStack width={"33%"}>
                     <Field label={"Identification Method"}>
                       <RadioGroup
                         value={idType || undefined}
+                        name={'id-type'}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                           setIdType(e.target.value as "nin" | "passport");
                         }}
@@ -187,6 +167,7 @@ export default function PassengerForm(props: { formID : string }) {
                         <Input
                           type={"text"}
                           placeholder={"Id"}
+                          id={'identification-number'}
                           value={idNumber}
                           onChange={(e) => setIdNumber(e.target.value)}
                         ></Input>

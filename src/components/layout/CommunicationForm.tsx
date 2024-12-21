@@ -78,6 +78,7 @@ export default function CommunicationForm() {
                             <InputGroup width={"inherit"} startElement={<LuUser />}>
                                 <Input
                                 type={"text"}
+                                id={"username"}
                                 placeholder={"Your name"}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -90,6 +91,7 @@ export default function CommunicationForm() {
                             <InputGroup width={"inherit"} startElement={<LuMail />}>
                                 <Input
                                 type={"email"}
+                                id={"email-address"}
                                 placeholder={"example@email.com"}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -131,6 +133,7 @@ export default function CommunicationForm() {
                           placeholder={"Phone number"}
                           type={"tel"}
                           pattern={"[0-9]{12}"}
+                          id={"phone-number"}
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                         ></Input>

@@ -68,6 +68,42 @@ export default function Booking() {
       PassengerFormList.push(<PassengerForm key={String(i)} formID={String(i)} />)
   }
 
+  const handleSubmitInformation = () => {
+	var communication_form = document.getElementById("communication-form")
+	const communication_username = communication_form?.querySelector("#username") as HTMLInputElement
+	const communication_email = communication_form?.querySelector("#email-address") as HTMLInputElement
+	const communication_phone = communication_form?.querySelector("#phone-number") as HTMLInputElement
+	var CommunicationDetails = {
+		name: communication_username.value || "undefined",
+		email: communication_email.value || "undefined",
+		phone: communication_phone.value || "undefined",
+	}
+
+	var PassengerDetails = []
+	for (let i = 1; i <= PassengerCount; i++) {
+		var formID = "passenger-form-" + String(i)
+		var passenger_form = document.getElementById(formID)
+		const passenger_name = passenger_form?.querySelector("#username") as HTMLInputElement
+		const passenger_gender = passenger_form?.querySelector('[name^="gender"]:checked') as HTMLInputElement
+		const passenger_dob = passenger_form?.querySelector("#date-of-birth") as HTMLInputElement
+		const passenger_country = passenger_form?.querySelector('[id^="select:country-code-' + String(i) + ':control"]') as HTMLElement
+		const passenger_id_type = passenger_form?.querySelector('[name^="id-type"]:checked') as HTMLInputElement
+		const passenger_id_num = passenger_form?.querySelector("#identification-number") as HTMLInputElement
+
+		PassengerDetails.push({
+			name: passenger_name.value || "undefined",
+			gender: passenger_gender?.value || "undefined",
+			dob: passenger_dob.value || "undefined",
+			country: passenger_country.innerText || "undefined",
+			id_type: passenger_id_type?.value || "undefined",
+			id_num: passenger_id_num.value || "undefined",
+		})
+	}
+
+	console.log(CommunicationDetails)
+	console.log(PassengerDetails)
+  }
+
   return (
     <>
       <NavBar />
@@ -82,9 +118,9 @@ export default function Booking() {
         ) : (
           <VStack align={'center'}>
             <Text fontSize={'lg'} fontWeight={'medium'} color={'colorPalette.700'}>Please fill in the information below to finish booking</Text>
-            <Flex width={800} paddingLeft={6} paddingRight={6} align={'center'} direction={'column'}>
+            <Flex width={920} paddingLeft={6} paddingRight={6} align={'center'} direction={'column'}>
               <HStack alignSelf={'normal'} justify={'space-between'}>
-                <VStack color={'gray.600'}>
+                <VStack color={'gray.600'} minWidth={'200px'} alignItems={'flex-start'}>
                   <Flex direction={'row'} spaceX={1}>
                     <Text>Depart from:</Text>
                     <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.SourcePort.label}</Text>
@@ -101,7 +137,7 @@ export default function Booking() {
                 </Icon>
                 ..... ... .. . . . .
                 </Text>
-                <VStack color={'gray.600'}>
+                <VStack color={'gray.600'} minWidth={'200px'} alignItems={'flex-end'}>
                   <Flex direction={'row'} spaceX={1}>
                     <Text>Leave for:</Text>
                     <Text fontWeight={'medium'} color={'colorPalette.700'}>{TicketData?.DestPort.label}</Text>
@@ -124,7 +160,7 @@ export default function Booking() {
               Please provide the personal information of each passenger
             </Text>
             {PassengerFormList}
-            <Button size={'2xl'} marginTop={12} width={360}>
+            <Button size={'2xl'} marginTop={12} marginBottom={72} width={360} onClick={handleSubmitInformation}>
               Submit Information
             </Button>
           </VStack>
