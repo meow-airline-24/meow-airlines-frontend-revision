@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import TicketChart from "@/components/layout/TicketChart";
 import { getTicketCount } from "@/utils/backend";
 
 const AdminPage = () => {
   const [ticketData, setTicketData] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const currentPath = usePathname();
 
   useEffect(() => {
     // Fetch ticket data once the component loads
@@ -28,6 +31,10 @@ const AdminPage = () => {
     return <div>Loading...</div>;
   }
 
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       {/* Sidebar */}
@@ -43,29 +50,40 @@ const AdminPage = () => {
       >
         <h2 style={{ fontSize: "1.5rem", marginBottom: "20px" }}>Admin Panel</h2>
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-          {["Dashboard", "Tickets", "Users", "Settings"].map((item, index) => (
+          {[
+            { label: "Dashboard", path: "/admin" },
+            { label: "Flight", path: "/admin/flight" },
+            { label: "Aircraft", path: "/admin/aircraft" },
+          ].map(({ label, path }, index) => (
             <li key={index} style={{ marginBottom: "15px" }}>
-              <a
-                href={`/admin/${item.toLowerCase()}`}
+              <button
+                onClick={() => handleNavigation(path)}
                 style={{
                   display: "block",
-                  color: "#fff",
+                  width: "100%",
+                  backgroundColor: currentPath === path ? "#475569" : "transparent",
+                  color: currentPath === path ? "#f8fafc" : "#fff",
                   textDecoration: "none",
                   padding: "10px 15px",
                   borderRadius: "5px",
+                  border: "none",
+                  textAlign: "left",
                   transition: "background-color 0.3s, color 0.3s",
+                  cursor: "pointer",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = "#475569"; // Lighter gray-blue on hover
                   e.currentTarget.style.color = "#f8fafc"; // Lighter text color
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.color = "#fff";
+                  if (currentPath !== path) {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = "#fff";
+                  }
                 }}
               >
-                {item}
-              </a>
+                {label}
+              </button>
             </li>
           ))}
         </ul>
