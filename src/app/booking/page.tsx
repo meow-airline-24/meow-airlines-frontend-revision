@@ -8,6 +8,8 @@ import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import PassengerForm from '@/components/layout/PassengerForm'
 import CommunicationForm from "@/components/layout/CommunicationForm";
+import { createBooking } from "@/utils/backend";
+import { useRouter } from "next/navigation";
 
 const DaysOfWeek = [
   "Sunday",
@@ -20,6 +22,7 @@ const DaysOfWeek = [
 ];
 
 export default function Booking() {
+	const router = useRouter();
   const [TicketData, setTicketData] = useState<any>()
   const [loading, setLoading] = useState(true)
 
@@ -71,7 +74,7 @@ export default function Booking() {
       PassengerFormList.push(<PassengerForm key={String(i)} formID={String(i)} />)
   }
 
-  const handleSubmitInformation = () => {
+  const handleSubmitInformation = async () => {
 	var communication_form = document.getElementById("communication-form")
 	const communication_username = communication_form?.querySelector("#username") as HTMLInputElement
 	const communication_email = communication_form?.querySelector("#email-address") as HTMLInputElement
@@ -104,7 +107,7 @@ export default function Booking() {
 			dob: passenger_dob.value || "undefined",
 			country_code: country_code,
 			id_type: passenger_id_type?.value || "undefined",
-			id_num: passenger_id_num.value || "undefined",
+			id_number: passenger_id_num.value || "undefined",
 		})
 	}
 	const travelDetails = {
@@ -115,7 +118,15 @@ export default function Booking() {
 		phone: CommunicationDetails.phone,
 		passengers: PassengerDetails,
 	  };
-	console.log(travelDetails)
+	  try {
+		await createBooking(travelDetails);
+		alert("Booking created successfully! Please check your email for confirmation.");
+		router.push("/");
+	  } catch (error) {
+		alert("Failed to create booking. Please try again later.");
+		router.push("/");
+	  }
+	
   }
 
   return (

@@ -169,7 +169,7 @@ export async function createBooking(input: any) {
 
     const res = await axios.post(
         API.BOOKING.create,
-        { input },
+        { itinerary: input.itinerary, type: input.type, flightClass: input.flightClass, email: input.email, phone: input.phone, passengers: input.passengers },
         {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -265,4 +265,18 @@ export async function editAircraft(aircraft: Aircraft) {
     );
 
     return res.data;
+}
+
+export async function ticketPublicSearch(ticket_id: string, id_type: string, id_number: string) {
+    const res = await axios.post(API.TICKET.public_search, {
+        ticket_id, id_type, id_number
+    });
+    return res.data
+}
+
+export async function ticketPublicEdit(ticket_id: string, id_type: string, id_number: string, cancel: boolean) {
+    const res = await axios.post(API.TICKET.public_edit, {
+        ticket_id, id_type, id_number, cancel
+    });
+    return res.data
 }
