@@ -46,6 +46,10 @@ export default function FlightPage() {
       arrival_airport: data.DestPort.value,
       departure_time: new Date(data.DepartDate),
     };
+
+    // Empty flight list to evade duplication of flights
+    setFlightList([])
+
     const fetchFlights = async () => {
       try {
         const res = await flightSearch(flight, data.PassengerCount)

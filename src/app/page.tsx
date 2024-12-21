@@ -18,28 +18,28 @@ export default function Home() {
         <Grid marginTop={16} templateColumns={'repeat(4, 1fr)'} templateRows={'repeat(2, 1fr)'} gap={'6'}>
           {/* alt format: Src to Dest Port - depart date - ticket cost - ticket type - button id */}
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id1'} />
+            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 3,399,000 - One way ticket - id1'} />
           </GridItem>
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id2'} />
+            <TicketCard src={'../locations/da nang.jpg'} alt={'Hanoi (HAN) to Da Nang (DAD) - 22/12/2024 - 2,499,000 - One way ticket - id2'} />
           </GridItem>
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id3'} />
+            <TicketCard src={'../locations/ha long.jpg'} alt={'Ho Chi Minh City (SGN) to Ha Long (VDO) - 22/12/2024 - 3,399,000 - One way ticket - id3'} />
           </GridItem>
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id4'} />
+            <TicketCard src={'../locations/ha noi.jpg'} alt={'Quang Binh (VDH) to Hanoi (HAN) - 22/12/2024 - 2,799,000 - One way ticket - id4'} />
           </GridItem>
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id5'} />
+            <TicketCard src={'../locations/nha trang.jpg'} alt={'Hanoi (HAN) to Nha Trang (CXR) - 22/12/2024 - 2,999,000 - One way ticket - id5'} />
           </GridItem>
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id6'} />
+            <TicketCard src={'../locations/da lat.jpg'} alt={'Hanoi (HAN) to Da Lat (DLI) - 22/12/2024 - 2,699,000 - One way ticket - id6'} />
           </GridItem>
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id7'} />
+            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Da Nang (DAD) to Ho Chi Minh City (SGN) - 22/12/2024 - 2,099,000 - One way ticket - id7'} />
           </GridItem>
           <GridItem>
-            <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 1,799,000 - One way ticket - id8'} />
+            <TicketCard src={'../locations/quang binh.jpg'} alt={'Nha Trang (CXR) to Quang Binh (VDH) - 22/12/2024 - 1,799,000 - One way ticket - id8'} />
           </GridItem>
         </Grid>
       </Flex>
