@@ -27,9 +27,7 @@ function isTokenExpired(token: string): boolean {
 async function refreshAccessToken() {
     try {
         const res = await axios.get(API.AUTH.refresh_access_token);
-
         const { accessToken } = res.data;
-
         // Store the new access token in cookies or local storage
         setAccessToken(accessToken);
         return accessToken;
@@ -135,7 +133,12 @@ export async function getFlightById(id: string) {
 }
 
 export async function getTicketCount() {
-    const res = await axios.get(API.TICKET.count);
+    const accessToken = await getAccessToken();
+    const res = await axios.get(API.TICKET.count, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
     return res.data;
 }
 
@@ -162,7 +165,19 @@ export async function getPostById(postId: string) {
     return post;
 }
 
-// export async function getPublicInfo() {
-//     const res = await axiosInstance.get(API.PUBLIC.info);
-//     return res.data;
-// }
+export async function createBooking(input: any) {
+    const accessToken = await getAccessToken();
+    console.log(accessToken);
+
+    const res = await axios.post(
+        API.BOOKING.create,
+        { input },
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+
+    return res.data;
+}

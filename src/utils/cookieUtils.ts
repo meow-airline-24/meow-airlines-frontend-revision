@@ -15,6 +15,10 @@ function decodeToken(token: string): JwtPayload | null {
   }
 }
 
+export function isTokenAvailable(): boolean {
+  return !!Cookies.get(ACCESS_TOKEN_KEY);
+}
+
 export async function getAccessToken(): Promise<string> {
   const token = Cookies.get(ACCESS_TOKEN_KEY);
   if (!token) {

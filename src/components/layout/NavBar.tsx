@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import {
   Box,
@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/menu";
 import { Tooltip } from "@/components/ui/tooltip";
 import { logout } from "@/utils/backend";
+import { isTokenAvailable } from "@/utils/cookieUtils";
 
 export const NavItem = forwardRef<HTMLButtonElement, ButtonProps>(
   function NavItem(props, ref) {
@@ -63,6 +64,16 @@ export const NavItem = forwardRef<HTMLButtonElement, ButtonProps>(
 export default function NavBar() {
   const router = useRouter();
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const accessToken = isTokenAvailable();
+    if (accessToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   const LoginButton = () => {
     return (
@@ -89,7 +100,7 @@ export default function NavBar() {
 
   async function handleLogOut() {
     await logout();
-    router.push("/");
+    window.location.reload();
   }
 
   return (
@@ -146,37 +157,44 @@ export default function NavBar() {
               <></>
             ) : (
               <>
-                <LoginButton />
-                <MenuRoot size={"md"}>
-                  <MenuTrigger>
-                    <Tooltip
-                      content={"Account"}
-                      showArrow
-                      positioning={{
-                        offset: { mainAxis: 24 },
-                      }}
-                      contentProps={{
-                        css: {
-                          "--tooltip-bg": "colors.colorPalette.500",
-                        },
-                      }}
-                    >
-                      <span>
-                        <Avatar
-                          src={"../avt-light.svg"}
-                          fallback={""}
-                          _hover={{ cursor: "pointer" }}
-                        />
-                      </span>
-                    </Tooltip>
-                  </MenuTrigger>
-                  <MenuContent>
-                    <MenuItem value={"settings"}>Settings</MenuItem>
-                    <MenuItem value={"logout"} onClick={handleLogOut}>
-                      Logout
-                    </MenuItem>
-                  </MenuContent>
-                </MenuRoot>
+                {isLoggedIn ? (
+                  <MenuRoot size={"md"}>
+                    <MenuTrigger>
+                      <Tooltip
+                        content={"Account"}
+                        showArrow
+                        positioning={{
+                          offset: { mainAxis: 24 },
+                        }}
+                        contentProps={{
+                          css: {
+                            "--tooltip-bg": "colors.colorPalette.500",
+                          },
+                        }}
+                      >
+                        <span>
+                          <Avatar
+                            src={"../avt-light.svg"}
+                            fallback={""}
+                            _hover={{ cursor: "pointer" }}
+                          />
+                        </span>
+                      </Tooltip>
+                    </MenuTrigger>
+                    {isLoggedIn ? (
+                      <MenuContent>
+                        <MenuItem value={"settings"}>Settings</MenuItem>
+                        <MenuItem value={"logout"} onClick={handleLogOut}>
+                          Logout
+                        </MenuItem>
+                      </MenuContent>
+                    ) : (
+                      <></>
+                    )}
+                  </MenuRoot>
+                ) : (
+                  <LoginButton />
+                )}
               </>
             )}
           </Flex>
