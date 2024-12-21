@@ -1,6 +1,7 @@
 import { Aircraft } from "./Aircraft";
 
 export type Flight = {
+    _id: string,
     flight_number: string,
     airline: string,
     departure_airport: string,
@@ -8,5 +9,5 @@ export type Flight = {
     departure_time: Date,
     arrival_time: Date,
     book_exp: Date,
-    aircraft_id: Aircraft
+    aircraft_id: string
 }

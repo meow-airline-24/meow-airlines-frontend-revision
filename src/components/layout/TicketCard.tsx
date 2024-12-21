@@ -1,41 +1,62 @@
-import { Badge, Box, HStack, Icon, Image, Text } from "@chakra-ui/react"
-import { HiStar } from "react-icons/hi"
+'use client'
 
-export default function TicketCard() {
-return (
-    <Box maxW="sm" borderWidth="1px">
-        <Image src={data.imageUrl} alt={data.imageAlt} />
-            <Box p="4" spaceY="2">
-                <HStack>
-                    <Badge colorPalette="teal" variant="solid">
-                        Superhost
-                    </Badge>
-                    <HStack gap="1" fontWeight="medium">
-                        <Icon color="orange.400">
-                            <HiStar />
-                        </Icon>
-                        <Text>
-                            {data.rating} ({data.reviewCount})
-                        </Text>
-                    </HStack>
-                </HStack>
-                <Text fontWeight="medium" color="fg">
-                    {data.title}
-                </Text>
-                <HStack color="fg.muted">
-                    {data.formattedPrice} • {data.beds} beds
-                </HStack>
+import { Box, HStack, IconButton, Image, ImageProps, Text } from "@chakra-ui/react"
+import { LuArrowRight } from "react-icons/lu";
+import { forwardRef } from "react"
+
+export const TicketCard = forwardRef<HTMLImageElement, ImageProps> (
+    function TicketCard(props, ref) {
+        const { src, alt, ...rest } = props
+        var data = alt?.split('-')
+
+        const handleClick = () => {
+            var TicketType = document.getElementById('ticket-type')
+        }
+
+        return (
+            <Box maxW={"xs"} borderWidth={"1px"} borderRadius={8} bg={'white'}>
+                <Image width={'320px'} height={'187px'} borderTopRadius={8} src={src} alt={alt} ref={ref} {...rest} />
+                <Box padding={"6"}>
+                    {data !== undefined ? (
+                        <>
+                            <Text fontSize={'2xl'} fontWeight={'medium'} color={'colorPalette.700'}>{data[0]}</Text>
+                            <Text color={'gray.600'}>Departure date: {data[1]}</Text>
+                            <HStack marginTop={'6'}>
+                                <Text color={'gray.600'}>only at:</Text> 
+                                <Text color={'colorPalette.700'}>(VND)</Text>
+                            </HStack>
+                            <HStack justify={'space-between'}>
+                                <Box>
+                                    <Text fontSize={'3xl'} fontWeight={'medium'} color={'colorPalette.700'}>{data[2]}</Text>
+                                    <Text color={'gray.600'}>{data[3]}</Text>
+                                </Box>
+                                <IconButton id={data[4]} onClick={handleClick}
+                                    colorPalette={'gray'} variant={'subtle'} color={'blue.700'} size={'lg'}>
+                                    <LuArrowRight />
+                                </IconButton>
+                            </HStack>
+                        </>
+                    ) : (
+                        <>
+                            <Text>{'Source and Destination'}</Text>
+                            <Text>{'Departure date'}</Text>
+                            <Text>{'Cost'}</Text>
+                            <Text>{'Ticket type'}</Text>
+                        </>
+                    )}
+                    
+                </Box>
             </Box>
-        </Box>
-    )
-}
+        )
+    }
+)
 
-const data = {
-  imageUrl: "https://bit.ly/2Z4KKcF",
-  imageAlt: "Rear view of modern home with pool",
-  beds: 3,
-  title: "Modern home in city center in the heart of historic Los Angeles",
-  formattedPrice: "$435",
-  reviewCount: 34,
-  rating: 4.5,
-}
+const airports = [
+    { label: "Hanoi", value: "HAN"},
+    { label: "Ho Chi Minh City", value: "SGN"},
+    { label: "Ha Long", value: "VDO"},
+    { label: "Da Nang", value: "DAD"},
+    { label: "Nha Trang", value: "CXR"},
+    { label: "Quang Binh", value: "VDH"},
+    { label: "Da Lat", value: "DLI"}
+]

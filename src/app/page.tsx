@@ -1,41 +1,58 @@
-import { Button } from '@/components/ui/button'
-import { Box, HStack, Image } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Heading, Flex, Image } from '@chakra-ui/react'
 import NavBar from '@/components/layout/NavBar'
-import TicketCart from '@/components/layout/TicketCard'
-
-import {
-  MenuContent,
-  MenuItem,
-  MenuRoot,
-  MenuTrigger,
-} from '@/components/ui/menu'
+import Footer from '@/components/layout/Footer';
+import BookingBar from '@/components/layout/BookingBar'
+import { TicketCard } from "@/components/layout/TicketCard";
+import BlogSection from '@/components/layout/BlogSection';
 
 export default function Home() {
   return (
     <>
       <NavBar />
-      <Image minW={1080} width={'vw'} src={'../world-travel.jpg'} alt={'World Travel'} position={'relative'}></Image>
+      <Box height={'100%'} id={'page-body'}>
+        <Box borderBottomColor={'orange.400'} width={'vw'} borderBottomWidth={4}>
+          <Image minW={1080} width={'vw'} src={'../world-travel.jpg'} alt={'World Travel'} position={'relative'}></Image>
+        </Box>
+        <Flex justify={'center'} marginTop={-64} minW={1080} width={'vw'}>
+          <BookingBar />
+        </Flex>
+        <Flex minW={1080} width={'vw'} align={'center'} direction={'column'} marginTop={12}>
+          <Heading fontSize={'3xl'} color={'blue.700'} marginBottom={8}>Read our blogs to get the latest news:</Heading>
+          <BlogSection />
+        </Flex>
+        <Flex direction={'column'} marginTop={16} minW={1080} width={'vw'} align={'center'} marginBottom={'160px'}>
+          <Heading fontSize={'3xl'} color={'blue.700'}>Flight recommendation:</Heading>
+          <Grid marginTop={16} templateColumns={'repeat(4, 1fr)'} templateRows={'repeat(2, 1fr)'} gap={'6'}>
+            {/* alt format: Src to Dest Port - depart date - ticket cost - ticket type - button id */}
+            <GridItem>
+              <TicketCard src={'../locations/tp hcm.jpg'} alt={'Hanoi (HAN) to Ho Chi Minh City (SGN) - 22/12/2024 - 3,399,000 - One way ticket - id1'} />
+            </GridItem>
+            <GridItem>
+              <TicketCard src={'../locations/da nang.jpg'} alt={'Hanoi (HAN) to Da Nang (DAD) - 22/12/2024 - 2,499,000 - One way ticket - id2'} />
+            </GridItem>
+            <GridItem>
+              <TicketCard src={'../locations/ha long.jpg'} alt={'Ho Chi Minh City (SGN) to Ha Long (VDO) - 22/12/2024 - 3,399,000 - One way ticket - id3'} />
+            </GridItem>
+            <GridItem>
+              <TicketCard src={'../locations/ha noi.jpg'} alt={'Quang Binh (VDH) to Hanoi (HAN) - 22/12/2024 - 2,799,000 - One way ticket - id4'} />
+            </GridItem>
+            <GridItem>
+              <TicketCard src={'../locations/nha trang.jpg'} alt={'Hanoi (HAN) to Nha Trang (CXR) - 22/12/2024 - 2,999,000 - One way ticket - id5'} />
+            </GridItem>
+            <GridItem>
+              <TicketCard src={'../locations/da lat.jpg'} alt={'Hanoi (HAN) to Da Lat (DLI) - 22/12/2024 - 2,699,000 - One way ticket - id6'} />
+            </GridItem>
+            <GridItem>
+              <TicketCard src={'../locations/tp hcm.jpg'} alt={'Da Nang (DAD) to Ho Chi Minh City (SGN) - 22/12/2024 - 2,099,000 - One way ticket - id7'} />
+            </GridItem>
+            <GridItem>
+              <TicketCard src={'../locations/quang binh.jpg'} alt={'Nha Trang (CXR) to Quang Binh (VDH) - 22/12/2024 - 1,799,000 - One way ticket - id8'} />
+            </GridItem>
+          </Grid>
+        </Flex>
 
-      <HStack>
-        <Button variant={'outline'}>Click me</Button>
-        <Button>Click me</Button>
-      </HStack>
-
-
-      <MenuRoot>
-      <MenuTrigger asChild>
-        <Button variant='outline' size='sm'>
-          Open
-        </Button>
-      </MenuTrigger>
-      <MenuContent>
-        <MenuItem value='new-txt'>New Text File</MenuItem>
-        <MenuItem value='new-file'>New File...</MenuItem>
-        <MenuItem value='new-win'>New Window</MenuItem>
-        <MenuItem value='open-file'>Open File...</MenuItem>
-        <MenuItem value='export'>Export</MenuItem>
-      </MenuContent>
-    </MenuRoot>
+      </Box>
+      <Footer />
     </>
   )
 }
