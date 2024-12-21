@@ -49,10 +49,7 @@ export default function PassengerForm(props: { formID : string }) {
           width={964}
           minW={964}
           borderRadius={8}
-          paddingLeft={8}
-          paddingRight={8}
-          paddingTop={8}
-          paddingBottom={8}
+          padding={8}
           shadow={"0px 0px 8px -4px var(--shadow-color)"}
           shadowColor={"black"}
         >
