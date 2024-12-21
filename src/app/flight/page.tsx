@@ -51,15 +51,8 @@ export default function FlightPage() {
       try {
         const res = await flightSearch(flight, data.PassengerCount)
           .then((res) => {
-            // Empty flight list to evade duplication of flights
-            setFlightList([])
-
             if (res !== null) {
-              res.forEach((element: { flight: Flight; prices: any }) => {
-                FlightList.push(element);
-                // console.log(element.flight);
-                // console.log(element.prices);
-              })
+              setFlightList(res)
             }
           })
           .finally(() => setLoading(false));
@@ -71,7 +64,7 @@ export default function FlightPage() {
     fetchFlights();
 
     setBookingData(data);
-  }, []);
+  }, [loading]);
 
   const getDate = (date : string) => {
     var day = new Date(date)
