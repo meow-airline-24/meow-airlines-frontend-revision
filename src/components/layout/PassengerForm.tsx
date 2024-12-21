@@ -31,6 +31,7 @@ export default function PassengerForm(props: { formID : string }) {
   const [dob, setDob] = useState<Date | null>(null);
   const [idType, setIdType] = useState<"nin" | "passport" | null>(null); // State for ID type
   const [idNumber, setIdNumber] = useState<string>(""); // State for ID number
+  const [countryCode, setCountryCode] = useState<string[]>([]);
 
   const FormID = 'passenger-form-' + formID
 
@@ -120,6 +121,7 @@ export default function PassengerForm(props: { formID : string }) {
                       collection={countries}
                       position={'relative'}
                       id={'country-code-' + formID}
+                      onValueChange={(e) => setCountryCode(e.value)}
                     >
                       <SelectLabel>Country of origin</SelectLabel>
                       <SelectTrigger clearable>
