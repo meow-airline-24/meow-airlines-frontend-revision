@@ -89,7 +89,7 @@ export default function FlightPage() {
   return (
     <Flex height={'100vh'} direction={'column'} justify={'space-between'}>
       <NavBar />
-      <Box width={'100vw'} height={'100vh'} minWidth={1080} marginTop={'80px'}>
+      <Box width={'100vw'} minHeight={'100vh'} height={'100%'} minWidth={1080} marginTop={'80px'}>
         {loading ? (
             <Flex paddingTop={12} align={'center'} direction={'column'}>
               <VStack marginTop={12}>
