@@ -46,6 +46,7 @@ const AIRCRAFT = {
 const POST = {
     create: `${BASE_API_URL}/post/create`,
     postId: (postId: number | string) => `${BASE_API_URL}/post/${postId}`,
+    getAll: `${BASE_API_URL}/post/getall`,
 }
 
 export const API = {

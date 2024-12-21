@@ -181,3 +181,8 @@ export async function createBooking(input: any) {
 
     return res.data;
 }
+
+export async function getAllPosts() {
+    const res = await axios.get(API.POST.getAll);
+    return res.data;
+}
