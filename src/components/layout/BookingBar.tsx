@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Alert, Box, Flex, HStack, IconButton, Input, Tabs, Text } from '@chakra-ui/react'
+import { Box, Flex, HStack, IconButton, Input, Tabs, Text } from '@chakra-ui/react'
+import { InputGroup } from '@/components/ui/input-group'
 import { Button } from '@/components/ui/button'
 import { CloseButton } from '@/components/ui/close-button'
 import { Field } from '@/components/ui/field'
@@ -11,6 +12,7 @@ import { StepperInput } from '@/components/ui/stepper-input'
 import { PopoverArrow, PopoverBody, PopoverCloseTrigger ,PopoverContent, PopoverRoot, PopoverTitle, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip } from '@/components/ui/tooltip'
 import { LuPlane, LuCalendar, LuArrowLeftRight } from 'react-icons/lu'
+import { LiaIdCard } from 'react-icons/lia'
 
 export default function BookingBar() {
     const [TicketType, setTicketType] = useState("one-way");
@@ -19,6 +21,9 @@ export default function BookingBar() {
     const [DepartDate, setDepartDate] = useState('yyyy-mm-dd')
     const [ReturnDate, setReturnDate] = useState('yyyy-mm-dd')
     const [PassengerCount, setPassengerCount] = useState(1)
+    const [IdType, setIdType] = useState('')
+    const [IdNumber, setIdNumber] = useState('')
+    const [TicketNumber, setTicketNumber] = useState('')
     const router = useRouter();
 
     const getTodayInString = () => {
@@ -56,6 +61,12 @@ export default function BookingBar() {
         } 
 
         alert('Please fill in all fields before searching for flight')
+    }
+
+    const handleTicketSearch = () => {
+        console.log(TicketNumber)
+        console.log(IdType)
+        console.log(IdNumber)
     }
 
     return (
@@ -371,21 +382,52 @@ export default function BookingBar() {
                     <Tabs.Content height={'100%'} value="user-booking">
                         <Flex direction={'column'} gap={14} align={'center'} marginTop={12} paddingLeft={8} paddingRight={8}>
                             <HStack gap={6} width={'100%'}>
-                                <Field label={'TICKET NUMBER'}>
+                                <Field label={'TICKET NUMBER'} width={'33%'}>
                                     <Input type={'text'} size={'xl'} _focus={{
                                         outlineWidth: 0,
                                         borderColor: 'gray.400'
                                     }} 
-                                    borderWidth={2} borderColor={'gray.200'} placeholder={'123xxxxxxxxxxx'} />
+                                    borderWidth={2} borderColor={'gray.200'} placeholder={'123xxxxxxxxxxx'} 
+                                    value={TicketNumber} 
+                                    onChange={(e) => setTicketNumber(e.target.value)} />  
                                 </Field>
-                                <Field label={'LAST NAME'}>
-                                    <Input type={'text'} size={'xl'} _focus={{
-                                        outlineWidth: 0,
-                                        borderColor: 'gray.400'
-                                    }} borderWidth={2} borderColor={'gray.200'} placeholder={'NGUYEN'} />
+
+                                <Field label={"IDENTIFICATION METHOD"} width={'33%'}>
+                                    <RadioGroup
+                                    value={IdType || undefined}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        setIdType(e.target.value as "nin" | "passport");
+                                    }}
+                                    asChild
+                                    >
+                                        <HStack
+                                            gap={6}
+                                            position={"relative"}
+                                            left={12}
+                                            marginTop={2}
+                                        >
+                                            <Radio value="nin">National ID</Radio>
+                                            <Radio value="passport">Passport ID</Radio>
+                                        </HStack>
+                                    </RadioGroup>
+                                </Field>
+
+                                <Field label={"IDENTIFICATION NUMBER"} width={'33%'}>
+                                    <InputGroup
+                                    width={"100%"}
+                                    startElement={<LiaIdCard />}>
+                                    <Input
+                                        type={"text"} size={'xl'} _focus={{
+                                            outlineWidth: 0,
+                                            borderColor: 'gray.400'
+                                        }} 
+                                        borderWidth={2} borderColor={'gray.200'} placeholder={'456xxxxxxx'}
+                                        value={IdNumber}
+                                        onChange={(e) => setIdNumber(e.target.value)} />                                           
+                                    </InputGroup>
                                 </Field>
                             </HStack>
-                            <Button height={12} width={64} borderRadius={8} fontSize={'xl'} variant={'solid'} bg={'orange.400'}>
+                            <Button height={12} width={64} borderRadius={8} fontSize={'xl'} variant={'solid'} bg={'orange.400'} onClick={handleTicketSearch}>
                                 Search
                             </Button>
                         </Flex>
