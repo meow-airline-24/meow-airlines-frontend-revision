@@ -7,6 +7,8 @@ import { Ticket } from "@/interfaces/Ticket";
 
 export default function TicketTab(props: { TicketData : Ticket }) {
     const { TicketData } = props
+    const IssuedDate = new Date(TicketData.issuing_date)
+    const DoB = new Date(TicketData.dob)
 
     const normalizeDate = (date : string) => {
         var yyyy = date.slice(0, 4)
@@ -41,7 +43,7 @@ export default function TicketTab(props: { TicketData : Ticket }) {
                     </Flex>
                     <Flex direction={'row'} gapX={1}>
                         <Text fontWeight={'medium'}>Issued at:</Text>
-                        <Text>{TicketData.issuing_date.toISOString()}</Text>
+                        <Text>{IssuedDate.toISOString()}</Text>
                     </Flex>
                 </VStack>
                 <VStack color={'blue.700'} fontSize={'lg'} alignItems={'flex-end'} textAlign={'right'}>
@@ -81,7 +83,7 @@ export default function TicketTab(props: { TicketData : Ticket }) {
                   <VStack width={"33%"}>
                     <Flex width={'100%'} direction={'column'}>
                         <Text fontSize={'sm'} fontWeight={'medium'}>Date of Birth</Text>
-                        <Text width={'100%'} marginTop={1} borderWidth={2} borderRadius={4} borderColor={'gray.300'} padding={2} bg={'gray.100'}>{getDayInString(TicketData.dob)}</Text>
+                        <Text width={'100%'} marginTop={1} borderWidth={2} borderRadius={4} borderColor={'gray.300'} padding={2} bg={'gray.100'}>{getDayInString(DoB)}</Text>
                     </Flex>
                     
                     <Flex width={'100%'} direction={'column'}>
