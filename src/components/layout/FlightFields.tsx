@@ -74,6 +74,7 @@ const FlightFields = ({
         // console.log("Creating flight:", flight);
         const createdFlight = await createFlight(flight);
         onSave(createdFlight);
+        alert("Flight created successfully, please refresh the page to see the changes");
       }
     } catch (error) {
       console.error("Error saving flight:", error);

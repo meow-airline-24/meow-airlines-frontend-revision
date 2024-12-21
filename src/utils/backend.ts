@@ -210,7 +210,7 @@ export async function createFlight(flight: Flight) {
 
     const res = await axios.post(
         API.FLIGHT.create,
-        { flight },
+        { _id:flight._id, flight_number: flight.flight_number, airline: flight.airline, departure_airport: flight.departure_airport, arrival_airport: flight.arrival_airport, departure_time: flight.departure_time, arrival_time: flight.arrival_time, book_exp: flight.book_exp, aircraft_id: flight.aircraft_id },
         {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
