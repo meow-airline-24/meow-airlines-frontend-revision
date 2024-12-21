@@ -205,7 +205,6 @@ export default function Booking() {
           </VStack>
         )}
       </Box>
-	  <Footer />
     </Flex>
   );
 }

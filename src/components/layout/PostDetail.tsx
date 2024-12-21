@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Box, Heading, Text, Spinner } from "@chakra-ui/react";
-import axios from "axios";
 import { Post } from "@/interfaces/Post";
 import { getPostById } from "@/utils/backend";
 

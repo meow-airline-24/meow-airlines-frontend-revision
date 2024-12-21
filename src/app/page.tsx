@@ -1,8 +1,9 @@
-import { Box, Grid, GridItem, Heading, HStack, Flex, Image } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Heading, Flex, Image } from '@chakra-ui/react'
 import NavBar from '@/components/layout/NavBar'
 import Footer from '@/components/layout/Footer';
 import BookingBar from '@/components/layout/BookingBar'
 import { TicketCard } from "@/components/layout/TicketCard";
+import BlogSection from '@/components/layout/BlogSection';
 
 export default function Home() {
   return (
@@ -15,7 +16,11 @@ export default function Home() {
         <Flex justify={'center'} marginTop={-64} minW={1080} width={'vw'}>
           <BookingBar />
         </Flex>
-        <Flex direction={'column'} marginTop={16} minW={1080} width={'vw'} align={'center'}>
+        <Flex minW={1080} width={'vw'} align={'center'} direction={'column'} marginTop={12}>
+          <Heading fontSize={'3xl'} color={'blue.700'} marginBottom={8}>Read our blogs to get the latest news:</Heading>
+          <BlogSection />
+        </Flex>
+        <Flex direction={'column'} marginTop={16} minW={1080} width={'vw'} align={'center'} marginBottom={'160px'}>
           <Heading fontSize={'3xl'} color={'blue.700'}>Flight recommendation:</Heading>
           <Grid marginTop={16} templateColumns={'repeat(4, 1fr)'} templateRows={'repeat(2, 1fr)'} gap={'6'}>
             {/* alt format: Src to Dest Port - depart date - ticket cost - ticket type - button id */}

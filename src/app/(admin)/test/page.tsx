@@ -5,6 +5,7 @@ import { Aircraft } from "@/interfaces/Aircraft";
 import { AircraftModel } from "@/interfaces/AircraftModel";
 import PassengerForm from '@/components/layout/PassengerForm'
 import CommunicationForm from "@/components/layout/CommunicationForm";
+import BlogSection from "@/components/layout/BlogSection";
 
 interface Price {
     First: number,
@@ -19,11 +20,6 @@ export default function Test() {
         rows: [1, 2, 3],
         columns: [1, 2, 3],
         manufacturer: 'def',
-    }
-    const aircraftA : Aircraft = {
-        model: modelA,
-        manufacture_year: 2000,
-        status: "Active",
     }
     const flight : Flight = {
         _id: '1870147uh123788adf',
@@ -53,12 +49,13 @@ export default function Test() {
     return (
         <Box bg='gray' w={'vw'} h={'vh'}>
             <AbsoluteCenter axis={'both'}>
-                <FlightTab key='abcdefghijk' FlightData={flight} FlightPrice={price} />
+                {/* <FlightTab key='abcdefghijk' FlightData={flight} FlightPrice={price} /> */}
                 {/* <Flex direction={'column'}>
                     <CommunicationForm />
                     
                     {PassengerFormList}
                 </Flex> */}
+                <BlogSection />
             </AbsoluteCenter>
         </Box>
     )

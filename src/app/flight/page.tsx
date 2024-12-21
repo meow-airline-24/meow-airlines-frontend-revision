@@ -144,7 +144,6 @@ export default function FlightPage() {
           </Box>
         )}
       </Box>
-      <Footer />
     </Flex>
   );
 }
